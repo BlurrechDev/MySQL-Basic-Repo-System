@@ -1,0 +1,169 @@
+<!doctype html>
+<html ng-app="game">
+<head>
+	<title>Bombermine — Massively Bomberman Online with up to 1000 players on the single map</title>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600&subset=latin,cyrillic' rel='stylesheet'>
+	<link rel="stylesheet" href="css/v6/game.css">
+	<script src="js/mapgen.js"></script>
+	<script src="js/pingserver.js"></script>
+	<script src="js/async.js"></script>
+	<script src="js/jquery-1.9.1.min.js"></script>
+	<script src="js/angular-1.1.3.min.js"></script>
+	<script src="/js/moment-1.7.2.min.js"></script>
+	<script src="js/v6/index.js"></script>
+	<script src="js/v6/directives.js"></script>
+	<script src="js/v6/GameCtrl.js"></script>
+	<script src="js/v6/GameviewCtrl.js"></script>
+	<script src="js/v6/IndexPageCtrl.js"></script>
+	<script src="js/v6/ProfilePageCtrl.js"></script>
+	<script src="js/v6/PlayPageCtrl.js"></script>
+	<script src="js/v6/GameServersCtrl.js"></script>
+
+	<script src="js/v6/router.js"></script>
+
+	<script src="/js/underscore.min.js"></script>
+	<script src="js/jquery.mentionsInput.js"></script>
+
+	<script src="config.js"></script>
+	<script>
+		// window.config.SERVER_ADDRESS = 'ws://s1.ru.bombermine.com:80/'
+	</script>
+	<script src="app/app.nocache.js"></script>
+
+	<script src="js/validator-min.js"></script>
+	<script src="js/Players.js"></script>
+	<script src="js/Squad.js"></script>
+	<script src="js/Squads.js"></script>
+	<script src="js/page-play.en.js"></script>
+	<script src="js/v6/scoreboard-new.js"></script>
+	<script src="js/ScoreboardCtrl.js"></script>
+	<script src="js/SquadsCtrl.js"></script>
+
+	<script src="js/jquery.tinyscrollbar.min.js"></script>
+</head>
+
+<body ng-controller="GameCtrl" ng-switch on="loaded">
+
+	<div ng-switch-when="true">
+
+	<div ng-switch on="!!player">
+
+		<div ng-switch-default id="index" ng-controller="IndexPageCtrl">
+
+			<div class="header">
+				<div class="centered">
+					<h1>
+						Bombermine
+						<img class="logo" src="/i/bombermine-new-beta.png">
+					</h1>
+					<p class="b">The most Massively Multiplayer Online Bomberman on the web</p>
+					<p class="s">— up to 1000 players on a single map. Right in your browser!</p>
+				</div>
+				<img class="html5-inside" title="HTML5 inside" src="http://www.w3.org/html/logo/downloads/HTML5_Badge_64.png">
+			</div>
+
+			<canvas id="bg"></canvas>
+
+				<div class="enter" ng-switch on="browserSupport">
+
+					<div ng-switch-when="true">
+
+						<ul class="tabs">
+							<li ng-class="{'active': activeTab == 'guest'}" ng-click="setActiveTab('guest')" class="guest">Guest</li>
+							<!--
+							<li ng-class="{'active': activeTab == 'register'}" ng-click="setActiveTab('register')" class="register">Register</li>
+							<li ng-class="{'active': activeTab == 'login'}" ng-click="setActiveTab('login')" class="login">Login</li>
+							-->
+						</ul>
+
+						<div ng-controller="GameServersCtrl" class="gameservers">
+							<p class="worldwide">Players online worldwide: <b>{{playersOnlineWorldwide}}</b></p>
+							<ul>
+								<li ng-repeat="server in config.servers" ng-click="selectServer(server)" ng-class="{'selected': selectedServer == server, 'down': server.down}">
+									<p class="name">{{server.name}}</p>
+									<p class="details" ng-show="server.pinged && !server.down">
+										<span class="players">Players: <b>{{server.status.players}}</b></span>
+										<span class="timeleft">Timeleft: <b>{{server.status.timeLeft}}</b></span>
+										<span class="latency" title="Latency"><b>{{server.latency}}</b> <em>ms</em></span>
+									</p>
+									<p class="details" ng-show="server.down && server.pinged">
+										<span>Down</span>
+									</p>
+								</li>
+							</ul>
+						</div>
+
+						<div ng-switch on="activeTab">
+
+							<div ng-switch-when="guest">
+								<input	type="text" name="nickname" ng-model="form.nickname"
+												placeholder="Guest nickname"
+												ng-class="{'error': errors.nickname}"
+												ng-keypress="keypress('nickname', $event)"
+												spellcheck="false"
+												autofocus>
+								<p class="error-info" ng-show="errors.nickname" ng-bind-html-unsafe="errors.nickname"></p>
+								<button ng-click="login()">Play</button>
+							</div>
+
+							<div ng-switch-when="login">
+								<input type="text" name="nickname" ng-model="form.nickname" placeholder="Nickname or email" autofocus>
+								<input type="password" name="pwd" ng-model="form.pwd" placeholder="Password">
+								<div class="remember">
+									<input type="checkbox" name="remember" ng-model="form.remember" id="remember">
+									<label for="remember">Remember me</label>
+								</div>
+								<button ng-click="login()">Login</button>
+							</div>
+
+							<div ng-switch-when="register">
+								<input type="text" name="nickname" ng-model="form.nickname" placeholder="Nickname" autofocus>
+								<input type="text" name="email" ng-model="form.email" placeholder="Email">
+								<input type="password" name="pwd" ng-model="form.pwd" placeholder="Password">
+								<div class="remember">
+									<input type="checkbox" name="remember" ng-model="form.remember" id="remember">
+									<label for="remember">Remember me</label>
+								</div>
+								<button ng-click="login()">Register</button>
+							</div>
+
+						</div>
+
+					</div>
+
+					<div ng-switch-when="false" class="browser-not-support">
+						Your browser do not support techniques/features used in this game.<br><br>
+						Please use latest versions of Chrome, Firefox, Safari or Opera.
+					</div>
+
+				</div>
+
+		</div>
+
+		<div ng-switch-when="true" ng-controller="GameviewCtrl" id="gameview">
+			<div ng-include="'/v6/tmpl/topbar.tmpl'"></div>
+			<div ng-view class="view"></div>
+		</div>
+
+	</div>
+
+	</div>
+
+	<div ng-switch-when="false" class="index-loading">
+		Loading...
+	</div>
+
+	<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-38811391-1']);
+	_gaq.push(['_setDomainName', 'bombermine.com']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+	  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	</script>
+
+</body>
+</html>

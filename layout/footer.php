@@ -1,0 +1,1 @@
+<div id="footer"><img src='company_logo.png'><p style='display: inline;'>&nbsp; 2014</p><hr></div> <!-- The company branded page footer with the potential for copyright or other metadata footnotes. -->

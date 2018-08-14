@@ -1,0 +1,243 @@
+/*
+The below section of styles globally style specific HTML element tags.
+*/
+body {
+    margin: 0;
+}
+
+h1 {
+    text-transform: capitalize;
+    font-size: 2.35vw;
+}
+
+h2 {
+    text-transform: capitalize;
+    font-size: 2.2vw;
+}
+
+h4 {
+    font-size: 1.46vw;
+}
+
+p, a {
+    font-size: 1.5vw;
+}
+
+hr {
+    margin-bottom: 30px;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+td, th {
+    padding: 20px;
+}
+
+textarea {
+    height: 4vw;
+    width: 16vw;
+}
+
+select, input {
+    width: 95%;
+    height: auto;
+    font-size: 16pt;
+    margin: auto;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* A style for the input tag when the input contents are deemed invalid. */
+input:invalid {
+    background: hsla(0, 90%, 70%, 1);
+}
+
+select, input[type=text], input[type=date], input[type=email], input[type=password], input[type=search] {
+    width: 16vw;
+    font-size: 1.5vw;
+}
+
+input[type=file] {
+    border: solid gray 1px;
+    font-size: 1.4vw;
+    width: 22vw;
+}
+
+input[type=submit] {
+    width: 13vw;
+    border-top: 1px solid #96D1F8;
+    background: #65A9d7;
+    padding: 0.2vw 1vw;
+    border-radius: 8px;
+    color: white;
+    font-family: Georgia, serif;
+    text-decoration: none;
+    vertical-align: middle;
+    margin-top: 20px;
+    font-size: 1.7vw;
+}
+   
+input[type=submit]:hover {
+    border-top-color: #28597A;
+    background: #28597A;
+    color: #CCC;
+}
+  
+input[type=submit]:active {
+    border-top-color: #1B435E;
+    background: #1B435E;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+   opacity: 1;
+}
+
+/*
+The below section of styles style all elements that contain the associated class in it's name.
+*/
+.productimage {
+    margin-left: 3px;
+    margin-right: 12px;
+    margin-top: 2px;
+    width: 11vw;
+    height: 14.2vw;
+    float: left;
+}
+
+.project-pane {
+    border: 1px black solid; 
+    height: 14.5vw; 
+    margin-bottom: 80px;
+}
+
+.project-menu {
+    margin-left: 1vw; 
+    margin-right: 1vw; 
+    float: left; 
+}
+
+.input-pane {
+    position: relative;
+	margin: auto;
+	width: 44%;
+    text-align: center;
+}
+
+.input-pane input[type=submit] {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.revision, .issue {
+    width: 66%;
+    margin: auto;
+    padding: 10px;
+}
+
+.border {
+    border: solid black 1px;
+}
+
+.border tr {
+    border: solid black 1px;
+}
+
+.hoverer:hover {
+    background-color: #ffff99;
+}
+
+.label {
+    width: 50px;
+    margin-right: -10.6vw;
+    margin-left: 5vw;
+    float: left;
+    margin-top: 5px;
+}
+
+.note {
+    min-height: 10px;
+}
+
+.ace_scrollbar {
+    display: none !important;
+}
+
+/*
+The below section of styles style all elements that contain the single element that contain the associated element ID.
+*/
+#header {
+    width: 100%;
+	height: 7vw;
+	background-image: url(company_logo.png);
+    background-size: 25vw auto;
+	background-repeat: no-repeat;
+	background-position: center center;
+	border-bottom: 2px solid gray;
+}
+
+#leftnav {
+	float: left;
+    width: 19.8vw;
+	height: 500px;
+	border-right: 1px solid gray;
+    font-size: 1vw;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+#leftnav strong {
+    margin-left: 3vw;
+}
+
+#leftnav img {
+    margin-left: 1vw;
+    width: 18vw;
+    height: auto;
+}
+
+#leftnav a {
+    font-size: 2vw;
+    margin-left: 2vw;
+}
+
+#rightnav {
+	float: right;
+	width: 19.8vw;
+	height: 500px;
+	border-left: 1px solid #694717;
+	font-size: 1vw;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+#body {
+    min-width: 500px;
+	margin: auto;
+	text-align: center;
+	display: block;
+	margin-top: 100px;
+}
+
+#editor { 
+    margin-right: auto;
+    margin-lefT: auto;
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+#footer {
+	margin-top: 25vw;
+	text-align: center;
+	border-top: 1px solid gray;
+	padding: 10px;
+}
+
+#footer img {
+    margin-left: 20px; 
+    width: 8vw; 
+    height: auto;
+}
